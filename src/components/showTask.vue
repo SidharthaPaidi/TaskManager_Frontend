@@ -2,29 +2,28 @@
   <div class="task-container">
     <div
       v-for="task in tasks"
-      :key="task.id"
+      :key="task._id"
       :class="{ 'hide-task': shouldHideTask(task) }"
     >
       <div
         @click="UpdateTask(task._id)"
-        class="not-completed-task"
-        v-if="type === 'not-completed' && !task.completed"
+        class="task-card"
+        :class="{ 'completed-task': task.completed }"
       >
-        {{ task.name }}
-      </div>
-      <div
-        @click="UpdateTask(task._id)"
-        class="completed-task"
-        v-else-if="type === 'completed' && task.completed"
-      >
-        {{ task.name }}
+        <span class="task-name">{{ task.name }}</span>
+        <button @click.stop="handleDeleteTask(task._id)" class="delete-button">
+          🗑️
+        </button>
       </div>
     </div>
   </div>
 </template>
 
+
+
 <script>
 import { mapActions } from "vuex";
+
 export default {
   props: {
     tasks: {
@@ -37,22 +36,17 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["updateTasks"]),
+    ...mapActions(["updateTasks", "deleteTask"]),
     UpdateTask(taskId) {
       const token = localStorage.getItem("user");
-      const task = this.tasks.find((t) => t._id === taskId);
-      const updatedStatus = !task.completed;
-
-      this.updateTasks({ taskId, token, updatePayload: { completed: updatedStatus } });
+      this.updateTasks({ taskId, token });
+    },
+    async handleDeleteTask(taskId) {
+      const token = localStorage.getItem("user");
+      await this.deleteTask({ taskId, token });
     },
     shouldHideTask(task) {
-      if (this.type === "completed" && task.completed) {
-        return false;
-      } else if (this.type === "not-completed" && !task.completed) {
-        return false;
-      } else {
-        return true;
-      }
+      return this.type === "completed" ? !task.completed : task.completed;
     },
   },
 };
@@ -63,25 +57,55 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+.task-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+  border-left: 5px solid transparent;
+  position: relative;
+}
+
+.task-card.completed-task {
+  background-color: #e0ffe0;
+  border-left-color: #4caf50;
+}
+
+.task-name {
+  font-size: 18px;
+  color: #333;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #f8d7da;
+  border-radius: 50%;
 }
 
 .hide-task {
   display: none;
-}
-
-.completed-task,
-.not-completed-task {
-  padding: 20px;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.completed-task {
-  background-color: #f0f0f0;
-  text-decoration: line-through;
-}
-
-.not-completed-task {
-  background-color: white;
 }
 </style>

@@ -7,7 +7,7 @@ const state = {
 const actions = {
   async fetchTasks({ commit }, token) {
     try {
-      const response = await axios.get("https://taskmanager-api-backend.onrender.com/task", {
+      const response = await axios.get("http://localhost:3000/task/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -23,7 +23,7 @@ const actions = {
     console.log(token);
     console.log(name);
     const response = await axios.post(
-      "https://taskmanager-api-backend.onrender.com/task/",
+      "http://localhost:3000/task/",
       {
         name,
       },
@@ -40,7 +40,7 @@ const actions = {
   async updateTasks({ commit }, { taskId, token, updatePayload }) {
     try {
       const response = await axios.patch(
-        `https://taskmanager-api-backend.onrender.com/task/${taskId}`,
+        `http://localhost:3000/task/${taskId}`,
         updatePayload,
         {
           headers: {
@@ -55,6 +55,20 @@ const actions = {
       console.error("Error updating task: ", error);
     }
   },
+  async deleteTask({ commit }, { taskId, token }) {
+    try {
+      await axios.delete(`http://localhost:3000/task/${taskId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      commit("removeTask", taskId);
+    } catch (error) {
+      console.error("Error deleting task: ", error);
+    }
+  },
+  
 };
 
 const getters = {
@@ -70,6 +84,9 @@ const mutations = {
       state.tasks.splice(index, 1, task);
     }
   },
+  removeTask: (state, taskId) => {
+    state.tasks = state.tasks.filter(task => task._id !== taskId);
+  },  
 };
 
 export default {

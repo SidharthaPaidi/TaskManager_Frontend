@@ -1,19 +1,20 @@
 <template>
   <div class="task-tracker-container">
-    <h3>Task Manager</h3>
+    <h3 class="title" style="color: aliceblue;">Task Manager</h3>
     <addTask v-if="isAuthenticated" />
     <div id="tasks" v-if="isAuthenticated">
-      <h4>To be finished</h4>
+      <h4>Tasks to be finished</h4>
       <showTask :tasks="completedTask" type="not-completed" class="task-section" />
-      <h4>Finished</h4>
+      <h4>Finished tasks</h4>
       <showTask :tasks="completedTask" type="completed" class="task-section" />
     </div>
     <div v-else class="welcome-message">
-      <h4>Welcome to the Task Manager!</h4>
-      <p>Please log in or sign up to manage your tasks.</p>
+      <h4 style="color: black;">Welcome to the Task Manager!</h4>
+      <p style="color: black;">Please log in or sign up to manage your tasks.</p>
     </div>
   </div>
 </template>
+
 
 <script>
 import { mapGetters, mapActions } from "vuex";
@@ -54,45 +55,33 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .task-tracker-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: #FFFFFF;
+  max-width: 800px;
+  margin: 50px auto;
   padding: 20px;
-  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #8A99A8;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-h3 {
+.title {
+  text-align: center;
   color: #333;
+  margin-bottom: 20px;
 }
 
 .task-section {
-  margin: 20px 0;
-  width: 100%;
+  margin-bottom: 20px;
 }
 
 .welcome-message {
   text-align: center;
-  padding: 20px;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  background-color: #e6f7ff;
-  color: #333;
-  width: 100%;
-  max-width: 400px;
-}
-
-.welcome-message h4 {
-  margin: 0;
-  color: #007BFF;
-}
-
-.welcome-message p {
-  margin-top: 10px;
   color: #555;
+  padding: 20px;
+  background: #A2ADB9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(1, 1, 1, 1);
 }
 </style>

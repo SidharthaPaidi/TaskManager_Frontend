@@ -35,13 +35,16 @@ export default {
 </script>
 
 <style scoped>
+h4 {
+  color: white;
+}
 .task-form-container {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #23292F;
+    box-shadow: 0 4px 6px rgba(1.5, 1.5, 1.5, 1.5);
     border-radius: 10px;
     text-align: center;
 }
@@ -58,6 +61,7 @@ export default {
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: border-color 0.3s ease;
+    background-color: #ADB8C2;
 }
 
 .task-input:focus {
@@ -69,7 +73,7 @@ export default {
     padding: 10px;
     font-size: 16px;
     color: #fff;
-    background-color: #007BFF;
+    background-color: #3D4752;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -77,6 +81,6 @@ export default {
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #687A8D;
 }
 </style>

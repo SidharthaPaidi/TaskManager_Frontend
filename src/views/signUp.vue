@@ -1,6 +1,6 @@
 <template>
   <div class="signup-form-container">
-    <h3>Sign Up</h3>
+    <h3 style="color: aliceblue">Sign Up</h3>
     <form @submit.prevent="submit" class="signup-form">
       <input
         v-model="data.name"
@@ -51,7 +51,7 @@ export default {
     const status = computed(() => store.getters["auth/isAuthenticated"]);
 
     const submit = async () => {
-      const response = await fetch("https://taskmanager-api-backend.onrender.com/auth/signup", {
+      const response = await fetch("http://localhost:3000/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -83,7 +83,7 @@ export default {
   max-width: 400px;
   margin: 100px auto;
   padding: 30px;
-  background-color: #f5f5f5;
+  background-color: #23292f;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
@@ -105,12 +105,13 @@ h3 {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #ADB8C2;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .signup-input:focus {
   outline: none;
-  border-color: #007BFF;
+  border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
@@ -118,7 +119,7 @@ h3 {
   padding: 12px;
   font-size: 16px;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #3d4752;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -126,7 +127,7 @@ h3 {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #687a8d;
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 </style>

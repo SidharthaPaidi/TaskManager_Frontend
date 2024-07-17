@@ -1,6 +1,6 @@
 <template>
   <div class="signin-form-container">
-    <h3>Sign In</h3>
+    <h3 style="color: aliceblue;">Sign In</h3>
     <form @submit.prevent="submit" class="signin-form">
       <input v-model="data.email" type="email" placeholder="Email" class="signin-input" />
       <input v-model="data.password" type="password" placeholder="Password" class="signin-input" />
@@ -27,7 +27,7 @@ export default {
     const status = computed(() => store.getters["auth/isAuthenticated"]);
 
     const submit = async () => {
-      const response = await fetch("https://taskmanager-api-backend.onrender.com/auth/login", {
+      const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -66,7 +66,7 @@ body, html {
   max-width: 400px;
   margin: 100px auto;
   padding: 30px;
-  background-color: #f5f5f5;
+  background-color: #23292F;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
@@ -89,6 +89,7 @@ h3 {
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ADB8C2;
 }
 
 .signin-input:focus {
@@ -101,7 +102,7 @@ h3 {
   padding: 12px;
   font-size: 16px;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #3d4752;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -109,7 +110,7 @@ h3 {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #687a8d;
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 </style>
