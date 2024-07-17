@@ -7,7 +7,7 @@ const state = {
 const actions = {
   async fetchTasks({ commit }, token) {
     try {
-      const response = await axios.get("http://localhost:3000/task/", {
+      const response = await axios.get(`${process.env.BASE_URL}/task/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -23,7 +23,7 @@ const actions = {
     console.log(token);
     console.log(name);
     const response = await axios.post(
-      "http://localhost:3000/task/",
+      `${process.env.BASE_URL}/task/`,
       {
         name,
       },
@@ -40,7 +40,7 @@ const actions = {
   async updateTasks({ commit }, { taskId, token, updatePayload }) {
     try {
       const response = await axios.patch(
-        `http://localhost:3000/task/${taskId}`,
+        `${process.env.BASE_URL}/task/${taskId}`,
         updatePayload,
         {
           headers: {
@@ -57,7 +57,7 @@ const actions = {
   },
   async deleteTask({ commit }, { taskId, token }) {
     try {
-      await axios.delete(`http://localhost:3000/task/${taskId}`, {
+      await axios.delete(`${process.env.BASE_URL}/task/${taskId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
