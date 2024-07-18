@@ -27,7 +27,7 @@ export default {
     const status = computed(() => store.getters["auth/isAuthenticated"]);
 
     const submit = async () => {
-      const response = await fetch(`${process.env.BASE_URL}/auth/login`, {
+      const response = await fetch("https://taskmanager-api-backend.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

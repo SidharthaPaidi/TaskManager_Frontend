@@ -7,7 +7,7 @@ const state = {
 const actions = {
   async fetchTasks({ commit }, token) {
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/task/`, {
+      const response = await axios.get("https://taskmanager-api-backend.onrender.com/task/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -20,10 +20,10 @@ const actions = {
     }
   },
   async addTasks({ commit }, {name, token}) {
-    console.log(token);
-    console.log(name);
+    // console.log(token);
+    // console.log(name);
     const response = await axios.post(
-      `${process.env.BASE_URL}/task/`,
+      `https://taskmanager-api-backend.onrender.com/task/`,
       {
         name,
       },
@@ -40,7 +40,7 @@ const actions = {
   async updateTasks({ commit }, { taskId, token, updatePayload }) {
     try {
       const response = await axios.patch(
-        `${process.env.BASE_URL}/task/${taskId}`,
+        `https://taskmanager-api-backend.onrender.com/task/${taskId}`,
         updatePayload,
         {
           headers: {
