@@ -1,6 +1,7 @@
 <template>
   <div class="signin-form-container">
     <h3 style="color: aliceblue;">Sign In</h3>
+    <p style="color: aliceblue;">Sample Email : s@gmail.com , Password : 123</p> 
     <form @submit.prevent="submit" class="signin-form">
       <input v-model="data.email" type="email" placeholder="Email" class="signin-input" />
       <input v-model="data.password" type="password" placeholder="Password" class="signin-input" />
