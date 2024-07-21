@@ -57,7 +57,7 @@ const actions = {
   },
   async deleteTask({ commit }, { taskId, token }) {
     try {
-      await axios.delete(`${process.env.BASE_URL}/task/${taskId}`, {
+      await axios.delete(`https://taskmanager-api-backend.onrender.com/task/${taskId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
